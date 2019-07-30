@@ -6,8 +6,8 @@ header('Content-Type: application/json');
 
 class getPrices {
     public function mubPrices(){
-        $serverName = "SENDBOXSERVER\\COMPAC2"; // -> Nombre del SQL Server con Instancia
-        $connectionInfo = array( "Database"=>"adCOMERCIALIZADORAIDE"); // -> Nombre de la base de datos
+        $serverName = "*\\*"; // -> Nombre del SQL Server con Instancia
+        $connectionInfo = array( "Database"=>"*"); // -> Nombre de la base de datos
         $conn = sqlsrv_connect( $serverName, $connectionInfo); // -> Conexión con parametros anteriores
         if( $conn ) { // -> Retorna true si la conexión fue exitosa
 
