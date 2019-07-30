@@ -81,12 +81,13 @@ class Product {
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
-                $query = sqlsrv_query($con, 'SELECT CCODIGOPRODUCTO FROM dbo.admProductos', array(), array('Scrollable' => SQLSRV_CURSOR_KEYSET));
+                $query = sqlsrv_query($con, 'SELECT CIDPRODUCTO FROM dbo.admProductos', array(), array('Scrollable' => SQLSRV_CURSOR_KEYSET));
                 $count_query = sqlsrv_num_rows($query);
                 for($i=0; $i<$count_query+4; $i++){
                     $getReference = sqlsrv_query($con, 'SELECT * FROM dbo.admProductos WHERE CIDPRODUCTO = '.$i.'', array(), array('Scrollable' => SQLSRV_CURSOR_FORWARD));
                     $getReference = sqlsrv_fetch_array($getReference, SQLSRV_FETCH_ASSOC);
-                    $getReference = $getReference['CCODIGOPRODUCTO'];
+                    $getReference = utf8_decode($getReference['CCODIGOPRODUCTO']);
+                    
                 }
             } else {
                 throw new Exception('No se pudo conectar a SQL Server');
@@ -96,15 +97,24 @@ class Product {
         }
     }
 
-    public function __nombre($referal){
+    public function __nombre($product){
         $name = 'SENDBOXSERVER\\COMPAC2';
         $base = array('Database' => 'adCOMERCIALIZADORAIDE');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
-                $query = sqlsrv_query($con, 'SELECT ');
+                $query = sqlsrv_query($con, 'SELECT CIDPRODUCTO FROM dbo.admProductos', array(), array('Scrollable' => SQLSRV_CURSOR_KEYSET));
+                $count_query = sqlsrv_num_rows($query);
+                for($i=0; $i<$count_query+4; $i++){
+                    $getName = sqlsrv_query($con, 'SELECT * FROM dbo.admProductos WHERE CIDPRODUCTO = '.$i.'', array(), array('Scrollable' => SQLSRV_CURSOR_KEYSET));
+                    $getName = sqlsrv_fetch_array($getName, SQLSRV_FETCH_ASSOC);
+                    $getName = utf8_decode($getName['CNOMBREPRODUCTO']);
+                    return $getName;
+                } 
+            } else {
+                throw new Exception('No se pudo conectar a SQL Server');
             }
-        } catch(\Exception $e) {
+        }catch(\Exception $e) {
             echo $e->getMessage();
         }
     }
@@ -112,6 +122,6 @@ class Product {
 }
 
 $a = new Product();
-$a->__referal('');
+$a->__nombre('x');
 
 ?>
