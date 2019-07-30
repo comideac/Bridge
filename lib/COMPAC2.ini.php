@@ -7,8 +7,8 @@ class Compac2 {
     public $con;
 
     public function __sql(){
-        $name = 'SENDBOXSERVER\\COMPAC2';
-        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
+        $name = '*\\*';
+        $base = array('Database' => '*');
         $con = sqlsrv_connect($name, $base);
         return $con;
     }
