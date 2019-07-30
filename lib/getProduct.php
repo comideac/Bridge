@@ -11,8 +11,8 @@ class Product {
      * It connect to contpaqi database (SQL SERVER or SQLEXPRESS)
      * */
     public function __mayor($mayor) {
-        $name = 'SENDBOXSERVER\\COMPAC2';
-        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
+        $name = '*\\*';
+        $base = array('Database' => '*');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
@@ -34,8 +34,8 @@ class Product {
      * It connect to contpaqi database (SQL SERVER or SQLEXPRESS)
      * */
     public function __teniente($teniente){
-        $name = 'SENDBOXSERVER\\COMPAC2';
-        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
+        $name = '*\\*';
+        $base = array('Database' => '*');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
@@ -57,8 +57,8 @@ class Product {
      * It connect to contpaqi database (SQL SERVER or SQLEXPRESS)
      * */
     public function __coronel($coronel){
-        $name = 'SENDBOXSERVER\\COMPAC2';
-        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
+        $name = '*\\*';
+        $base = array('Database' => '*');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
@@ -76,8 +76,8 @@ class Product {
     }
 
     public function __referal($referal){
-        $name = 'SENDBOXSERVER\\COMPAC2';
-        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
+        $name = '*\\*';
+        $base = array('Database' => '*');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
