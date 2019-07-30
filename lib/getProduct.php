@@ -11,8 +11,8 @@ class Product {
      * It connect to contpaqi database (SQL SERVER or SQLEXPRESS)
      * */
     public function __mayor($mayor) {
-        $name = '*\\*';
-        $base = array('Database' => '*');
+        $name = 'SENDBOXSERVER\\COMPAC2';
+        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
@@ -34,8 +34,8 @@ class Product {
      * It connect to contpaqi database (SQL SERVER or SQLEXPRESS)
      * */
     public function __teniente($teniente){
-        $name = '*\\*';
-        $base = array('Database' => '*');
+        $name = 'SENDBOXSERVER\\COMPAC2';
+        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
@@ -57,8 +57,8 @@ class Product {
      * It connect to contpaqi database (SQL SERVER or SQLEXPRESS)
      * */
     public function __coronel($coronel){
-        $name = '*\\*';
-        $base = array('Database' => '*');
+        $name = 'SENDBOXSERVER\\COMPAC2';
+        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
@@ -76,19 +76,33 @@ class Product {
     }
 
     public function __referal($referal){
-        $name = '*\\*';
-        $base = array('Database' => '*');
+        $name = 'SENDBOXSERVER\\COMPAC2';
+        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
         try {
             $con = sqlsrv_connect($name, $base);
             if($con){
-                $query = sqlsrv_query($con, 'SELECT CIDPRODUCTO FROM dbo.admProductos', array(), array('Scrollable' => SQLSRV_CURSOR_KEYSET));
+                $query = sqlsrv_query($con, 'SELECT CCODIGOPRODUCTO FROM dbo.admProductos', array(), array('Scrollable' => SQLSRV_CURSOR_KEYSET));
                 $count_query = sqlsrv_num_rows($query);
                 for($i=0; $i<$count_query+4; $i++){
                     $getReference = sqlsrv_query($con, 'SELECT * FROM dbo.admProductos WHERE CIDPRODUCTO = '.$i.'', array(), array('Scrollable' => SQLSRV_CURSOR_FORWARD));
                     $getReference = sqlsrv_fetch_array($getReference, SQLSRV_FETCH_ASSOC);
-                    var_dump($getReference);
-                    #if($getRfere){}
+                    $getReference = $getReference['CCODIGOPRODUCTO'];
                 }
+            } else {
+                throw new Exception('No se pudo conectar a SQL Server');
+            }
+        } catch(\Exception $e) {
+            echo $e->getMessage();
+        }
+    }
+
+    public function __nombre($referal){
+        $name = 'SENDBOXSERVER\\COMPAC2';
+        $base = array('Database' => 'adCOMERCIALIZADORAIDE');
+        try {
+            $con = sqlsrv_connect($name, $base);
+            if($con){
+                $query = sqlsrv_query($con, 'SELECT ');
             }
         } catch(\Exception $e) {
             echo $e->getMessage();
