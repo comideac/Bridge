@@ -6,5 +6,7 @@
             "email": "daniel4581@protonmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "zendframework/zendframework": "^3.0"
+    }
 }
