@@ -1,7 +1,7 @@
 <?php
 
 class Counted {
-    public function rows(){
+    public function Rows(){
         $name = 'SENDBOXSERVER\\COMPAC2';
         $base = array('Database' => 'adCOMERCIALIZADORAIDE');
         try {
@@ -18,3 +18,5 @@ class Counted {
         }
     }
 }
+$a = new Counted;
+$a->Stock();
