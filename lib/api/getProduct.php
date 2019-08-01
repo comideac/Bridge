@@ -9,12 +9,8 @@ class getProduct {
         $client = new SoapClient('https://ideac.com.mx/store/api/soap/?wsdl');
         $session = $client->login('P41N3ST', '78ae61b5c3af8b9630a74d37da1407a4');
         $countedRows = new Counted;
-        for($i=1104; $i<$countedRows->rows()+1104; $i++){
-            $call = $client->call($session, 'catalog_product.info', '1105');
-            #if($call) {
-            #
-            #}
-        }
+        $call = $client->call($session, 'catalog_product.info', 'SCMG5100', 'SKU');
+        var_dump($call);
     }
 }
 
