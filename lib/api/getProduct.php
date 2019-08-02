@@ -20,14 +20,49 @@ class getProduct {
 
         $client = new SoapClient('https://ideac.com.mx/store/api/soap/?wsdl');
         $session = $client->login('P41N3ST', '78ae61b5c3af8b9630a74d37da1407a4');
+
         $sheet = IOFactory::load('../inventario.csv');
         $sheet = $sheet->getActiveSheet()->toArray(null, true, true, true);
-        foreach($sheet as $qx){
+
+        $product = $client->call($session, 'catalog_product.list');
+        
+
+        for($i=1;$i<count($sheet);$i++){
+            if(!empty($sheet[$i]['B'])){
+                if($sheet[$i]['B'] != '--------------------------------'){
+                    error_reporting(0);
+                    if($product[$i]['name'] == $sheet[$i]['D']){
+                        $update = $client->call($session, "product_stock.update", array(
+                            $i+1104,
+                            'qty' => $sheet[$i]['J'],
+                            'is_in_stock' => $sheet[$i]['J'] > 0 ? '1' : '0',
+                            'manage_stock' => 1,
+                            'use_config_manage_stock' => 0,
+                            'min_qty' => 1,
+                            'use_config_min_qty' => 0,
+                            'min_sale_qty' => 1,
+                            'use_config_min_sale_qty' => 0,
+                            'max_sale_qty' => 10,
+                            'use_config_max_sale_qty' => 0,
+                            'is_qty_decimal' => 0,
+                            'backorder' => 1,
+                            'use_config_backorders' => 0,
+                            'notify_stock_qty' => 0,
+                            'use_config_notify_stock_qty' => 0
+                        ));
+                        print_r($update . " || " . $product[$i]['name'] . " || " . $sheet[$i]['D'] . " || " . $sheet[$i]['J'] . "\n");
+                    }
+                }
+            }
+        }
+
+        /*foreach($sheet as $qx){
             if(!empty($qx['B'])){
                 if($qx['B'] != "--------------------------------"){
                     if($qx['B'] > 0){
-                        $in_stock = 1;
-                        $attributes = array(
+                        while($qx['B'] == ){
+                            $in_stock = 1;
+                            $attributes = array(
                             'qty' => $qx['J'],
                             'is_in_stock' => $in_stock,
                             'manage_stock' => 1,
@@ -43,21 +78,21 @@ class getProduct {
                             'use_config_backorders' => 0,
                             'notify_stock_qty' => 0,
                             'use_config_notify_stock_qty' => 0
-                        );
-                        $sku = $client->call($session, 'catalog_product.list', $qx['B']);
-                        var_dump($sku['SKU']);
+                            );
+                            $sku = $client->call($session, 'catalog_product.update', array($qx['B'], $attributes));
+                            var_dump($sku);
+                        }
                         #if(){
                             #$call = $client->call($session, 'cataloginventory_stock_item.update', array($qx['B'], $attributes));
                         #} else {
                             #
                         #}
-                        var_dump($call);
                     } else {
                         #
                     }
                 }
             }
-        }
+        }*/
         
         #$query = sqlsrv_query($conn, "SELECT * FROM dbo.admProductos", array(), array('Scrollable' => SQLSRV_CURSOR_KEYSET));
         #while($row = sqlsrv_fetch_array($query, SQLSRV_FETCH_ASSOC)){
