@@ -26,6 +26,7 @@ class getProduct {
 
         $product = $client->call($session, 'catalog_product.list');
 
+        error_reporting(0);
         for($i=1;$i<count($product);$i++){
             for($l=1;$l<count($sheet);$l++){
                 $productPage = $product[$i]['sku'];
