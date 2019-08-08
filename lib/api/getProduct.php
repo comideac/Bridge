@@ -40,7 +40,6 @@ class getProduct {
             if(!empty($test3['idp'])){
                 $test4 = $shoot->query('SELECT * FROM productlist WHERE sku = "'.$test3['Sku'].'"');
                 $test4 = $test4->fetch_array(MYSQLI_ASSOC);
-                var_dump($test4);
                 $update = $client->call($session, "product_stock.update", array(
                     $test3['idp'],
                     'qty' => $test4['Stock'],
@@ -59,6 +58,7 @@ class getProduct {
                     'notify_stock_qty' => 0,
                     'use_config_notify_stock_qty' => 0
                 ));
+                var_dump($update);
             }
 
         }
